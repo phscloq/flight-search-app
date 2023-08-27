@@ -9,10 +9,10 @@ function FlightPage() {
   const [matchingFlights, setMatchingFlights] = useState<Flight[]>([]);
   const [sortType, setSortType] = useState<keyof Flight>('departure_time');
 
-  if (flights) {
+
     console.log(flights)
     useEffect(() => {
- 
+      if (flights) {
             const filteredFlights = flights.filter((flight: Flight) =>
               flight.departure_city === searchParams.departureCity &&
               flight.arrival_city === searchParams.arrivalCity
@@ -39,9 +39,9 @@ function FlightPage() {
                 console.error('Error sorting flights:', error);
               }
           
-
+            }
       }, [searchParams, flights, sortType]);
-  }
+  
 
 
 
