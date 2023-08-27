@@ -1,6 +1,6 @@
 
 export async function GetData(){
-    const url= 'http://localhost:3002/';
+    const url= 'https://barandogan.me/mock-data/mock-data.json';
     const res = await fetch(`${url}`);
     if(!res.ok){
         throw new Error('Failed to fetch data');
