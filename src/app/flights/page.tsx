@@ -6,7 +6,7 @@ import FlightsList from './components/flightsList';
 import SortButtons from './components/sortButtons';
 import FilterFlights from '../lib/filterFlights';
 function FlightPage() {
-  const { isLoading, handleToggleFlights, filteredWDate, filteredWRoute, showAllFlights, returnFlights } = useSearchContext();
+  const { isLoading, handleToggleFlights, filteredWDate, filteredWRoute, showAllFlights, returnFlights, searchParams } = useSearchContext();
 
   FilterFlights();
 if(isLoading){
@@ -48,11 +48,12 @@ if(isLoading){
           </div>
 
         {showAllFlights ? <FlightsList matchedFlights={filteredWRoute} /> : null}
-        <div className='px-4'>
+        {returnFlights && searchParams.isRoundTrip ? <div className='px-4'>
         <h1 className=' mb-2 font-bold text-xl'> Return Flights:</h1>
 
-        </div>
-        {returnFlights ? <FlightsList matchedFlights={returnFlights}/> : null}
+        </div> : null}
+        
+        {returnFlights && searchParams.isRoundTrip ? <FlightsList matchedFlights={returnFlights}/> : null}
       </div>
     </main>
   );
