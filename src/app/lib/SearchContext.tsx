@@ -14,9 +14,19 @@ interface SearchContextProps {
   cities: any[]; 
   flights: any[]; 
   isLoading: boolean;
+  sortType: string;
+  showAllFlights: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  detailsVisible: boolean[]; 
-  setDetailsVisible: React.Dispatch<React.SetStateAction<boolean[]>>; 
+  detailsVisible: string | null; 
+  filteredWDate: any[];
+  filteredWRoute: any[];
+  returnFlights: any[];
+  handleFilteredWDate: (e:any)=>void;
+  handleFilteredWRoute: (e:any)=>void;
+  handleReturnFlights: (e:any)=>void;
+  handleSortType: (e:any)=>void;
+  handleToggleFlights: ()=>void;
+  handleDetailsVisible: (id:string)=>void;
 }
 
 const SearchContext = createContext<SearchContextProps | undefined>(undefined);
@@ -34,8 +44,13 @@ interface SearchProviderProps {
 export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   const [cities, setCities] = useState([]);
   const [flights, setFlights] = useState([]);
+  const [filteredWDate, setFilteredWDate] = useState([]);
+  const [filteredWRoute, setFilteredWRoute] = useState([]);
+  const [returnFlights, setReturnFlights] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [detailsVisible, setDetailsVisible] = useState<boolean[]>([]);
+  const [detailsVisible, setDetailsVisible] = useState<string | null>(null);
+  const [sortType, setSortType] = useState('departure_time');
+  const [showAllFlights, setShowAllFlights] = useState<boolean>(false); 
 
 
   useEffect(() => {
@@ -57,8 +72,33 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
     returnDate: null,
   });
 
+  const handleFilteredWDate = (e:any)=>{
+    setFilteredWDate(e);
+  };
+  const handleFilteredWRoute = (e:any)=>{
+    setFilteredWRoute(e);
+  };
+  const handleReturnFlights = (e:any)=>{
+    setReturnFlights(e);
+  };
+
+  const handleSortType = (e:any)=>{
+setSortType(e);
+
+  };
+  const handleToggleFlights = () => {
+    setShowAllFlights(!showAllFlights);
+   
+  };
+  const handleDetailsVisible = (id:string)=>{
+    setDetailsVisible((prevFlightID)=>(prevFlightID===id ? null: id))
+  };
   return (
-    <SearchContext.Provider value={{ searchParams, setSearchParams, cities, flights, isLoading, setIsLoading, detailsVisible, setDetailsVisible }}>
+    <SearchContext.Provider value={{returnFlights, handleReturnFlights, handleDetailsVisible, handleToggleFlights, 
+    showAllFlights, handleSortType, sortType, filteredWDate, 
+    filteredWRoute, handleFilteredWDate, handleFilteredWRoute, 
+    searchParams, setSearchParams, cities, flights, 
+    isLoading, setIsLoading, detailsVisible}}>
       {children}
     </SearchContext.Provider>
   );
