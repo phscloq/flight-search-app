@@ -8,6 +8,75 @@ export default function Search(){
 
     const [showDepartureCityList, setShowDepart] = useState(false);
     const [showArrivalCityList, setShowArrival] = useState(false);
+    const [error, setError] = useState('');
+    const [canNavigate, setCanNavigate] = useState(false);
+    const [inputErrors, setInputErrors] = useState({
+      departureCity: false,
+      arrivalCity: false,
+      departureDate: false,
+      arrivalDate: false
+    });
+    useEffect(() => {
+      const validateSearchParams = () => {
+        let hasErrors = false;
+      
+        if (!searchParams.departureCity || !searchParams.arrivalCity) {
+          setInputErrors({
+            departureCity: !searchParams.departureCity,
+            arrivalCity: !searchParams.arrivalCity,
+            departureDate: false,
+            arrivalDate: false
+          });
+          hasErrors = true;
+        } else {
+          setInputErrors({
+            departureCity: false,
+            arrivalCity: false,
+            departureDate: false,
+            arrivalDate: false
+          });
+        }
+      
+        if (searchParams.isRoundTrip && !searchParams.returnDate) {
+          setInputErrors({
+            departureCity: false,
+            arrivalCity: false,
+            departureDate: false,
+            arrivalDate: true
+          });
+          hasErrors = true;
+        }
+      
+        if (!searchParams.departureDate && !searchParams.isRoundTrip) {
+          setInputErrors({
+            departureCity: false,
+            arrivalCity: false,
+            departureDate: true,
+            arrivalDate: false
+          });
+          hasErrors = true;
+        }
+      
+        if (!hasErrors) {
+          setCanNavigate(true);
+          setError("");
+        } else {
+          setCanNavigate(false);
+          setError("Please fill out the required fields.");
+        }
+      };
+      
+  
+      validateSearchParams();
+    }, [searchParams]);
+
+
+//today's date:
+const today= new Date();
+const year= today.getFullYear();
+const month = String(today.getMonth()+1).padStart(2, '0');
+const day = String(today.getDate()).padStart(2, '0');
+const formattedDate = `${year}-${month}-${day}`;
 
 
 
@@ -52,6 +121,9 @@ const handleReturnDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 };
     return(
         <div className=' w-11/12'>
+          <div className="mb-4 text-red-500 font-semibold">
+            <p>{error}</p>
+          </div>
           <div className='mb-4'>
             <label className=''><input className='mr-2' type='checkbox' checked={searchParams.isRoundTrip} onChange={()=>handleRoundTripToggle()}></input>Round trip</label>
             <label className='ml-4'><input className='mr-2' type='checkbox' checked={!searchParams.isRoundTrip} onChange={()=>handleRoundTripToggle()}></input>One way</label>
@@ -60,8 +132,8 @@ const handleReturnDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           <div className=' text-black'>
               <div className='flex mb-8 w-full'>
                       <div className='w-1/2 pr-2'>
-                        <input className='w-full px-4 py-2 rounded-lg bg-slate-100 
-                        border border-gray-300 focus:border-blue-500  focus:outline-none' 
+                        <input className={`${inputErrors.departureCity ? 'border-red-600' : 'border-gray-300' } w-full py-2  px-2 rounded-lg bg-slate-100
+                         border  focus:border-blue-500 focus:outline-none`}
                         placeholder='Departure City'
                         value={searchParams.departureCity}
                         onChange={(e)=>handleDepartureCityChange(e.target.value)}
@@ -75,8 +147,8 @@ const handleReturnDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                       />
                       </div> 
                       <div className='w-1/2 pl-2'>
-                        <input className='w-full py-2  px-2 rounded-lg bg-slate-100
-                         border border-gray-300 focus:border-blue-500 focus:outline-none' 
+                        <input className={`${inputErrors.arrivalCity ? 'border-red-600' : 'border-gray-300' } w-full py-2  px-2 rounded-lg bg-slate-100
+                         border  focus:border-blue-500 focus:outline-none`}
                          placeholder='Arrival City'
                          value={searchParams.arrivalCity}
                          onChange={(e)=>handleArrivalCityChange(e.target.value)}
@@ -93,17 +165,19 @@ const handleReturnDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               </div>
               <div className='flex  w-full  mb-8'>
                     <div className='w-1/2 pr-2'>
-                      <input className='px-4 py-2 rounded-lg w-full 
-                      border border-gray-300 focus:border-blue-500 focus:outline-none' type='date'
+                      <input className={`${inputErrors.departureDate ? 'border-red-600' : 'border-gray-300' } w-full py-2  px-2 rounded-lg bg-slate-100
+                         border  focus:border-blue-500 focus:outline-none`} type='date'
                       value={searchParams.departureDate ? searchParams.departureDate.toISOString().split('T')[0]: ''}
                       onChange={(e)=>handleDepartureDateChange(e)}
+                      min={formattedDate}
                       ></input>
                     </div>
                     <div className='w-1/2 pl-2'>
-                      <input className='px-4 py-2 rounded-lg w-full
-                      border border-gray-300 focus:border-blue-500 focus:outline-none' type='date' disabled={!searchParams.isRoundTrip}
+                      <input className={`${inputErrors.arrivalDate ? 'border-red-600' : 'border-gray-300' } w-full py-2  px-2 rounded-lg bg-slate-100
+                         border  focus:border-blue-500 focus:outline-none`} type='date' disabled={!searchParams.isRoundTrip}
                       value={searchParams.returnDate ? searchParams.returnDate.toISOString().split('T')[0]: ''}
                       onChange={(e)=>handleReturnDateChange(e)}
+                      min={searchParams.departureDate?.toISOString().split('T')[0]}
                       ></input>
                     </div>
               </div>
@@ -113,7 +187,7 @@ const handleReturnDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             href='/flights'
         >
            <button className='w-full h-12 text-white bg-blue-600 rounded-lg'
-         
+         disabled={!canNavigate}
          >Search flight</button>
            
         </Link>
