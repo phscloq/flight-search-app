@@ -1,7 +1,4 @@
-'use client'
-import { GetData } from "./data/data";
 import Search from "./components/search"
-import { useState, useEffect } from "react";
 export default  function Home() {
 
 
