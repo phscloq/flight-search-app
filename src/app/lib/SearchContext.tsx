@@ -16,6 +16,10 @@ interface SearchContextProps {
   isLoading: boolean;
   sortType: string;
   showAllFlights: boolean;
+  showDepartureCityList: boolean;
+  showArrivalCityList: boolean;
+  setShowDepart: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowArrival: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   detailsVisible: string | null; 
   filteredWDate: any[];
@@ -51,7 +55,8 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   const [detailsVisible, setDetailsVisible] = useState<string | null>(null);
   const [sortType, setSortType] = useState('departure_time');
   const [showAllFlights, setShowAllFlights] = useState<boolean>(false); 
-
+  const [showDepartureCityList, setShowDepart] = useState<boolean>(false);
+  const [showArrivalCityList, setShowArrival] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -98,7 +103,7 @@ setSortType(e);
     showAllFlights, handleSortType, sortType, filteredWDate, 
     filteredWRoute, handleFilteredWDate, handleFilteredWRoute, 
     searchParams, setSearchParams, cities, flights, 
-    isLoading, setIsLoading, detailsVisible}}>
+    isLoading, setIsLoading, detailsVisible, showDepartureCityList, showArrivalCityList, setShowArrival, setShowDepart }}>
       {children}
     </SearchContext.Provider>
   );
