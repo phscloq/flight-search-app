@@ -119,11 +119,11 @@ function TicketType(){
   };
   return(
     <div className='mb-4'>
-      <label className=''>
+      <label className=' dark:text-white '>
         <input className='mr-2' type='checkbox' checked={searchParams.isRoundTrip} onChange={()=>handleRoundTripToggle()} />
         Round trip
       </label>
-      <label className='ml-4'>
+      <label className=' dark:text-white ml-4'>
         <input className='mr-2' type='checkbox' checked={!searchParams.isRoundTrip} onChange={()=>handleRoundTripToggle()} />
         One way
       </label>
@@ -150,7 +150,7 @@ function FlightDateInputs({inputErrors}:{inputErrors: InputsErrors}){
   return(
     <div className='flex  w-full  mb-8'>
       <div className='w-1/2 pr-2'>
-      <label className=' text-sm font-medium leading-none' htmlFor="departureDate">Departure Date</label>
+      <label className=' dark:text-white  text-sm font-medium leading-none' htmlFor="departureDate">Departure Date</label>
         <input className='w-full py-2  px-2 rounded-lg bg-slate-100
         border  focus:border-blue-500 focus:outline-none' type='text'
         value={searchParams.departureDate ? searchParams.departureDate.toISOString().split('T')[0]: ''}
@@ -161,7 +161,7 @@ function FlightDateInputs({inputErrors}:{inputErrors: InputsErrors}){
         ></input>
       </div>
       <div className='w-1/2 pl-2'>
-      <label className=' text-sm font-medium leading-none' htmlFor="returnDate">Return Date</label>
+      <label className=' dark:text-white  text-sm font-medium leading-none' htmlFor="returnDate">Return Date</label>
         <input className={`${inputErrors.arrivalDate ? 'border-red-600' : 'border-gray-300' } w-full py-2  px-2 rounded-lg bg-slate-100
           border  focus:border-blue-500 focus:outline-none`} type='date' disabled={!searchParams.isRoundTrip}
         value={searchParams.returnDate ? searchParams.returnDate.toISOString().split('T')[0]: ''}
@@ -211,7 +211,7 @@ function CityInputs({inputErrors}:{inputErrors: InputsErrors}){
   return (
     <div className='flex mb-8 w-full gap-6'>
       <div className='w-1/2'>
-        <label className=' text-sm font-medium leading-none' htmlFor="departureCity">Departure City</label>
+        <label className=' dark:text-white  text-sm font-medium leading-none' htmlFor="departureCity">Departure City</label>
         <input className={`${inputErrors.departureCity ? 'border-red-600' : 'border-gray-300' } w-full py-2  px-2 rounded-lg bg-slate-100
         border  focus:border-blue-500 focus:outline-none`}
         placeholder='Enter departure city'
@@ -231,7 +231,7 @@ function CityInputs({inputErrors}:{inputErrors: InputsErrors}){
       />
       </div> 
       <div className='w-1/2'>
-        <label className='text-sm font-medium leading-none mb-4' htmlFor="arrivalCity">Arrival City</label>
+        <label className=' dark:text-white text-sm font-medium leading-none mb-4' htmlFor="arrivalCity">Arrival City</label>
         <input className={`${inputErrors.arrivalCity ? 'border-red-600' : 'border-gray-300' } w-full py-2  px-2 rounded-lg bg-slate-100
         border  focus:border-blue-500 focus:outline-none`}
         placeholder='Enter arrival city'
