@@ -16,8 +16,8 @@ export default  function Cities({SearchedCity, cities, show, onSelect}:{Searched
         }
 console.log(filteredCities);
     return (
-        <div className={`${show ? 'block': 'hidden'} shadow-lg absolute bg-white  z-20  overflow-auto max-h-60`}>
-            <ul className="">
+        <div className={`${show ? 'block': 'hidden'} shadow-lg absolute bg-white z-20  overflow-auto max-h-60`}>
+            <ul className="text-black">
                 {filteredCities.map((city:any)=>{
                     return(
                         <>
