@@ -17,10 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Structure>{children}
-          <Link className='absolute right-8 top-6 underline font-bold  hover:text-blue-700' 
-          href='https://github.com/phscloq'>GitHub</Link>
+      <body className={`${inter.className} bg-gray-100 dark:bg-gray-900`}>
+        <Structure>
+          {children}
         </Structure>
       </body>
     </html>
