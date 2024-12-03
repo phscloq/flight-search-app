@@ -8,14 +8,20 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-
+@layer utilities {
+  .pause {
+    animation-play-state: paused;
+  }
+}
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
+/* .slider{
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 10% 90%,
+    transparent
+    );
+} */
