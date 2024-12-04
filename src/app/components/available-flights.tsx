@@ -5,19 +5,29 @@ import { useSearchContext } from "../lib/SearchContext";
 
 export default function AvailableFlights(){
     const {flights, filteredWDate} = useSearchContext();
-    const currentFlightIndex = 0; // Define the currentFlightIndex variable
-
+   /*  const generateFlights = (count: number) => {
+        const cities = ['New York', 'London', 'Tokyo', 'Paris', 'Sydney', 'Dubai', 'Singapore', 'Berlin', 'Moscow', 'Los Angeles']
+        return Array.from({ length: count }, (_, i) => ({
+          id: i + 1,
+          departure_city: cities[Math.floor(Math.random() * cities.length)],
+          arrival_city: cities[Math.floor(Math.random() * cities.length)],
+          departure_time: `2023-07-${String(i % 30 + 1).padStart(2, '0')}`,
+          seats: Math.floor(Math.random() * 10) + 1
+        }))
+      }
+      
+      const flightsArr = generateFlights(40) */
+      
     return(
-        <div className="mb-8  rounded-lg p-4 max-w-4xl">
-          <h2 className="text-xl font-bold mb-4 text-center">Available Flights </h2>
-          <div className="overflow-x-hidden flex slider">
-            <ul className="animate-infinite-scroll flex gap-8  hover:pause h-36  items-center  ">
-                {flights.map((flight, index) => (
+        <div className="mb-8 mx-auto max-w-4xl w-full overflow-x-hidden flex relative slider ">
+            <ul className="animate-infinite-scroll flex gap-8  hover:pause h-36  items-center">
+                {[...flights, ...flights].map((flight, index) => (
                 <li
-                    key={flight.id}
-                    className={` w-[300px] h-[100px] bg-white rounded-lg  p-4 text-black  hover:scale-110 hover:shadow-lg transition-all duration-300`}
+                    key={index}
+                    className={` w-48  cursor-default  sm:w-[300px] h-[100px] bg-white rounded-lg  p-2 sm:p-4 text-black  hover:scale-110 hover:shadow-lg transition-all duration-300`}
+                  
                 >
-                    <p className="text-lg font-semibold">
+                    <p className=" font-medium sm:text-lg sm:font-semibold">
                     {flight.departure_city} to {flight.arrival_city}
                     </p>
                     <p className="text-sm">
@@ -26,11 +36,14 @@ export default function AvailableFlights(){
                     <p className="text-sm">
                     Available Seats: {Math.floor(Math.random() * 10)+1}
                     </p>
+                    {/* <p>
+                        {index}
+                    </p> */}
+
 
                 </li>
                 ))}
             </ul>
           </div>
-        </div>
     )
 }
