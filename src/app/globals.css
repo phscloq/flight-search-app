@@ -17,11 +17,20 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
-/* .slider{
-  mask-image: linear-gradient(
+.slider{
+  -webkit-mask: linear-gradient(
     to right,
     transparent,
-    #000 10% 90%,
+    black 10%,
+    black 80%,
     transparent
     );
-} */
+    mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 80%,
+    transparent
+    );
+  
+}
