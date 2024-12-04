@@ -15,14 +15,17 @@ const config: Config = {
       },
       keyframes:{
         "infinite-scroll":{
-        "0%": { transform: "translateX(3%)" },
-        "100%": { transform: "translateX(calc(-50% - 20px))" }
+        "100%": { transform: "translateX(calc(-50% - 1rem))" }
       },
       },
       animation: {
-        "infinite-scroll": "infinite-scroll 60s linear infinite"
-      }
+        "infinite-scroll": "infinite-scroll 80s linear infinite"
+      },
+
     },
+    screens:{
+      'mobile-m': '375px',
+    }
   },
   plugins: [],
 }
