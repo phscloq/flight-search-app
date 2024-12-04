@@ -21,11 +21,11 @@ const config: Config = {
       animation: {
         "infinite-scroll": "infinite-scroll 80s linear infinite"
       },
-
+      screens:{
+        'mobile-m': '375px',
+      }
     },
-    screens:{
-      'mobile-m': '375px',
-    }
+  
   },
   plugins: [],
 }
