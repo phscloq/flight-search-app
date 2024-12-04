@@ -24,7 +24,7 @@ export default function FlightDateInputs({inputErrors}:{inputErrors: InputsError
   
   
     return(
-      <div className='flex flex-col mobile-m:flew-row   sm:justify-between gap-4 w-full  mb-8'>
+      <div className='flex flex-col mobile-m:flex-row  sm:justify-between gap-4 w-full  mb-8'>
         <div className='flex-1'>
         <label className=' dark:text-white   text-sm font-medium leading-none' htmlFor="departureDate">Departure Date</label>
           <input className='text-black w-full py-2  px-2 rounded-lg 
