@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Search Flights',
   description: 'A web app for searching flights based on mock data',
+  icons: {
+    icon: '/icon',
+  },
 }
 
 export default function RootLayout({
