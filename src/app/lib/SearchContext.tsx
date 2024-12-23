@@ -57,12 +57,12 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   const [showAllFlights, setShowAllFlights] = useState<boolean>(false); 
   const [showDepartureCityList, setShowDepart] = useState<boolean>(false);
   const [showArrivalCityList, setShowArrival] = useState<boolean>(false);
-
+  const today = new Date();
   useEffect(() => {
     async function fetchData() {
       const data = await GetData();
       setCities(data.cities);
-      setFlights(data.flights);
+      setFlights(data.flights.filter((flight: any) => new Date(flight.departure_time) >= today));
       setIsLoading(false);
     }
   
