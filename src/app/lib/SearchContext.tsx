@@ -87,9 +87,8 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
     setReturnFlights(e);
   };
 
-  const handleSortType = (e:any)=>{
-setSortType(e);
-
+  const handleSortType = (value:string)=>{
+  setSortType(value);
   };
   const handleToggleFlights = () => {
     setShowAllFlights(!showAllFlights);
