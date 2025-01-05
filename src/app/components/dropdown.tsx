@@ -14,14 +14,14 @@ export default  function Cities({SearchedCity, cities, show, onSelect}:{Searched
             );
           }
         }
-console.log(filteredCities);
-    return (
+
+        return (
         <div className={`${show ? 'block': 'hidden'} shadow-lg absolute bg-white z-20  overflow-auto max-h-60`}>
             <ul className="text-black">
                 {filteredCities.map((city:any)=>{
                     return(
                         <>
-                        <li key={city.code} className=" p-2 hover:bg-slate-200 hover:text-black"
+                        <li key={city.code} className=" p-2 hover:bg-slate-200 hover:text-black cursor-default"
                           onClick={() => onSelect(city.name)}
                         >{city.name}</li>   
                       
