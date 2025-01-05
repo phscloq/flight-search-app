@@ -19,7 +19,7 @@ const config: Config = {
       },
       },
       animation: {
-        "infinite-scroll": "infinite-scroll 80s linear infinite"
+        "infinite-scroll": "infinite-scroll 100s linear infinite"
       },
       screens:{
         'mobile-m': '375px',
