@@ -3,8 +3,13 @@ import { formatTime, formatDate } from "./formatTimeDate";
 import { Flight } from "@/app/data/types";
 export default function FlightsList({matchedFlights}:{matchedFlights:Flight[]}){
     const { detailsVisible, handleDetailsVisible } = useSearchContext();
+    const formatDuration = (minutes: number) => {
+      const hours = Math.floor(minutes / 60)
+      const mins = minutes % 60
+      return `${hours}h ${mins}m`
+    }
 return(
-    <ul className=' px-4'>
+    <ul className=''>
        
           {matchedFlights && matchedFlights.map((flight, index) => (
             <li key={flight.id} className='w-full border bg-white p-4 mb-4 rounded shadow'>
@@ -12,7 +17,7 @@ return(
                 <div>
                   <p className='font-bold text-lg'>{formatTime(flight.departure_time)} - {formatTime(flight.arrival_time)}</p>
                   <p>{flight.departure_city} - {flight.arrival_city}</p>
-                  <p>Duration: {flight.duration} minutes</p>
+                  <p>Duration: {formatDuration(flight.duration)}</p>
                 </div>
                 <div className='text-end'>
                   <p className='text-red-500 text-xl font-bold'>${flight.price}</p>
